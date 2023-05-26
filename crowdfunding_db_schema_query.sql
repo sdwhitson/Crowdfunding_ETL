@@ -6,6 +6,8 @@ CREATE TABLE "Category" (
      )
 );
 
+SELECT * FROM "Category";
+
 CREATE TABLE "Subcategory" (
     "subcategory_id" VARCHAR(50)   NOT NULL,
     "subcategory" VARCHAR(50)   NOT NULL,
@@ -13,6 +15,8 @@ CREATE TABLE "Subcategory" (
         "subcategory_id"
      )
 );
+
+SELECT * FROM "Subcategory";
 
 CREATE TABLE "Contacts" (
     "contact_id" INT   NOT NULL,
@@ -24,6 +28,9 @@ CREATE TABLE "Contacts" (
      )
 );
 
+SELECT * FROM "Contacts";
+
+-- First attempt at creating the Campaign table
 CREATE TABLE "Campaign" (
     "cf_id" INT   NOT NULL,
     "contact_id" INT   NOT NULL,
@@ -44,6 +51,7 @@ CREATE TABLE "Campaign" (
      )
 );
 
+-- Second attempt at creating the Campaign table trying to get forgein keys to work
 ALTER TABLE "Category" ADD CONSTRAINT "fk_Category_category_id" FOREIGN KEY("category_id")
 REFERENCES "Campaign" ("category_id");
 
@@ -70,8 +78,8 @@ CREATE TABLE "Campaign" (
     CONSTRAINT "uq_Campaign_subcategory_id" UNIQUE ("subcategory_id")
 );
 
-SELECT * FROM "Campaign";
 
+-- Third attempt at creating the Campaign table changed variable types to match the data types in the csv file
 CREATE TABLE "Campaign" (
     "cf_id" INT NOT NULL,
     "contact_id" INT NOT NULL,
@@ -92,6 +100,8 @@ CREATE TABLE "Campaign" (
     CONSTRAINT "fk_Campaign_Category" FOREIGN KEY ("category_id") REFERENCES "Category" ("category_id"),
     CONSTRAINT "fk_Campaign_Subcategory" FOREIGN KEY ("subcategory_id") REFERENCES "Subcategory" ("subcategory_id")
 );
+
+SELECT * FROM "Campaign";
 
 DROP TABLE "Campaign";
     
